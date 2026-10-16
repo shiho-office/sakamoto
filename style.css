@@ -316,22 +316,23 @@ html,body{overflow-x:clip}
 /* =========================================================
    写真レイアウト
    ========================================================= */
-/* ---------- トップのメイン写真 ---------- */
-.hero-photo{padding:0;background:linear-gradient(#f4f8fb, var(--sky) 70%);overflow:hidden}
-.hero-photo .hero-text{position:relative;z-index:2;max-width:920px;margin:0 auto;padding:64px 20px 0;text-align:center}
-.hero-photo h1{font-size:clamp(26px,3.4vw,42px)}
-.hero-photo .lead{margin:0 auto;color:#4c5a57}
-.hero-photo .actions{justify-content:center}
-.hero-img{position:relative;z-index:1;margin-top:-40px;height:clamp(300px,50vw,700px)}
-.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 40%;
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 22%);mask-image:linear-gradient(to bottom,transparent 0,#000 22%)}
-.hero-points{list-style:none;margin:-44px auto 0;padding:0;position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);
-  background:var(--white);border-radius:16px;box-shadow:var(--shadow);max-width:900px;overflow:hidden}
-.hero-points li{padding:18px 16px;text-align:center;font-size:15px;border-left:1px solid var(--line)}
-.hero-points li:first-child{border-left:0}
-.hero-points b{display:block;font-family:var(--mincho);color:var(--green);font-size:18px}
+/* ---------- トップのメイン写真（空の部分に見出しを重ねる） ---------- */
+.hero-photo{padding:0 0 64px;background:linear-gradient(var(--sky),var(--paper) 420px);overflow:visible}
+.hero-visual{position:relative;height:min(66.6vw,880px);overflow:hidden}
+.hero-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-copy{position:absolute;left:0;right:0;top:clamp(20px,3.2vw,56px)}
+.hero-copy .eyebrow{background:rgba(255,255,255,.75);padding:3px 12px;border-radius:999px;margin-bottom:12px;font-size:clamp(11px,1vw,13px)}
+.hero-copy h1{font-size:clamp(20px,2.8vw,42px);line-height:1.5;margin:0;color:#21302c;
+  text-shadow:0 0 18px rgba(255,255,255,.95),0 0 4px rgba(255,255,255,.9)}
+.hero-card2{position:relative;z-index:2;margin-top:clamp(-120px,-7vw,-40px);background:var(--white);border-radius:20px;box-shadow:var(--shadow);
+  display:grid;grid-template-columns:1.4fr 1fr;gap:28px;padding:28px 32px;align-items:center}
+.hero-lead p{margin:0 0 18px;color:#4c5a57}
+.hero-lead .actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-points{list-style:none;margin:0;padding:0 0 0 28px;border-left:1px solid var(--line);display:grid;gap:12px}
+.hero-points li{font-size:15px;display:flex;gap:14px;align-items:baseline}
+.hero-points b{font-family:var(--mincho);color:var(--green);font-size:17px;min-width:5em}
 .hero-photo + .section{padding-top:72px}
-.hero-photo{padding-bottom:56px}
+.hero-photo .container{display:block}
 
 /* ---------- お悩み（写真つき） ---------- */
 .worries-wrap{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:stretch}
@@ -375,6 +376,8 @@ html,body{overflow-x:clip}
 .cta-actions{flex-direction:row;flex-wrap:wrap;align-items:center;gap:24px;margin-top:22px}
 
 @media (max-width:960px){
+  .hero-card2{grid-template-columns:1fr}
+  .hero-points{padding:16px 0 0;border-left:0;border-top:1px solid var(--line)}
   .services-photo{grid-template-columns:1fr 1fr}
   .worries-wrap{grid-template-columns:1fr}
   .worries-photo{max-height:260px}
@@ -385,14 +388,14 @@ html,body{overflow-x:clip}
   .reason-detail > div:last-child{grid-column:2;grid-row:1}
 }
 @media (max-width:720px){
-  .hero-photo .hero-text{padding-top:40px;text-align:left}
-  .hero-photo .actions{justify-content:flex-start}
-  .hero-img{margin-top:-30px;height:auto;aspect-ratio:3/2}
-  .hero-img img{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 22%);mask-image:linear-gradient(to bottom,transparent 0,#000 22%)}
-  .hero-points{margin-top:-20px;grid-template-columns:1fr}
-  .hero-points li{border-left:0;border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:baseline;text-align:left}
-  .hero-points li:first-child{border-top:0}
-  .hero-points b{display:inline;font-size:16px;min-width:5em}
+  .hero-visual{height:auto;overflow:visible;display:flex;flex-direction:column}
+  .hero-copy{order:-1}
+  .hero-visual img{position:static;height:auto;aspect-ratio:3/2;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%)}
+  .hero-copy{position:static;padding-top:28px;padding-bottom:4px}
+  .hero-copy h1{font-size:25px}
+  .hero-card2{margin-top:-24px;grid-template-columns:1fr;padding:22px 20px;gap:18px}
+  .hero-points{padding:16px 0 0;border-left:0;border-top:1px solid var(--line)}
   .services-photo{grid-template-columns:1fr}
   .pt-photo{width:70%}
   .reason-detail{grid-template-columns:1fr}
