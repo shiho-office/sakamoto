@@ -401,3 +401,11 @@ html,body{overflow-x:clip}
   .reason-detail{grid-template-columns:1fr}
   .reason-detail .num,.reason-detail .rd-photo,.reason-detail > div:last-child{grid-column:1;grid-row:auto}
 }
+.portrait .photo img + span{display:none}
+.portrait .photo img{object-position:center top}
+
+/* 代表名のラベルは写真の下端に（顔にかからないように） */
+.portrait figcaption{left:50%;bottom:-22px;transform:translateX(-50%);white-space:nowrap;text-align:center;padding:8px 20px}
+.portrait{margin-bottom:22px}
+.worries-photo img{object-position:center 30%}
+.reason-detail .rd-photo[src="photo-visit.jpg"]{object-position:center 25%}
