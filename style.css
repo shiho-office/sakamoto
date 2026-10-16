@@ -3,8 +3,9 @@
    色を変えたいときは :root の値だけ変更すればOKです
    ========================================================= */
 :root{
-  --paper:#faf7f1;      /* 背景（和紙のような生成り） */
-  --paper-2:#f2ece1;    /* 背景・濃いめ */
+  --paper:#fbfaf7;      /* 背景（やわらかい白） */
+  --paper-2:#eef4f6;    /* 背景・淡い空色 */
+  --sky:#e3eef6;        /* 写真の空になじむ色 */
   --white:#ffffff;
   --ink:#2b2a27;        /* 本文 */
   --muted:#6b665d;      /* 補足文字 */
@@ -310,3 +311,90 @@ p{margin:0 0 1em}
   .gnav.open{visibility:visible}
 }
 html,body{overflow-x:clip}
+
+
+/* =========================================================
+   写真レイアウト
+   ========================================================= */
+/* ---------- トップのメイン写真 ---------- */
+.hero-photo{padding:0;background:linear-gradient(#f4f8fb, var(--sky) 70%);overflow:hidden}
+.hero-photo .hero-text{position:relative;z-index:2;max-width:920px;margin:0 auto;padding:64px 20px 0;text-align:center}
+.hero-photo h1{font-size:clamp(26px,3.4vw,42px)}
+.hero-photo .lead{margin:0 auto;color:#4c5a57}
+.hero-photo .actions{justify-content:center}
+.hero-img{position:relative;z-index:1;margin-top:-40px;height:clamp(300px,50vw,700px)}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 40%;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 22%);mask-image:linear-gradient(to bottom,transparent 0,#000 22%)}
+.hero-points{list-style:none;margin:-44px auto 0;padding:0;position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);
+  background:var(--white);border-radius:16px;box-shadow:var(--shadow);max-width:900px;overflow:hidden}
+.hero-points li{padding:18px 16px;text-align:center;font-size:15px;border-left:1px solid var(--line)}
+.hero-points li:first-child{border-left:0}
+.hero-points b{display:block;font-family:var(--mincho);color:var(--green);font-size:18px}
+.hero-photo + .section{padding-top:72px}
+.hero-photo{padding-bottom:56px}
+
+/* ---------- お悩み（写真つき） ---------- */
+.worries-wrap{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:stretch}
+.worries-photo{margin:0;border-radius:var(--radius);overflow:hidden}
+.worries-photo img{width:100%;height:100%;object-fit:cover}
+.worries-wrap .worries{grid-template-columns:1fr;gap:14px}
+.worries-wrap .worry{padding:20px 22px 18px 56px}
+.worries-wrap .worry::before{top:4px;left:16px;font-size:52px}
+.worries-wrap .worry p{margin:0}
+.worries-wrap .worry span{margin-top:6px}
+
+/* ---------- 業務カード（写真つき） ---------- */
+.services-photo{grid-template-columns:repeat(4,1fr);gap:20px}
+.services-photo .service-card{flex-direction:column;padding:0;gap:0;overflow:hidden}
+.services-photo .service-card img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.services-photo .sc-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+.services-photo .sc-body p{flex:1}
+.services-photo h3{font-size:19px}
+
+/* ---------- 各ページの見出し（写真つき） ---------- */
+.page-title.has-photo{padding:72px 0 66px}
+.page-title .container{position:relative;z-index:2}
+.pt-photo{position:absolute;top:0;right:0;bottom:0;width:52%;background-size:cover;background-position:center;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 45%);mask-image:linear-gradient(to right,transparent 0,#000 45%);opacity:.9}
+.page-title.has-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--green) 40%,rgba(47,91,79,.15));z-index:1}
+
+/* ---------- 業務詳細の写真 ---------- */
+.detail-side{display:grid;gap:18px}
+.detail-photo{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:var(--radius)}
+
+/* ---------- 選ばれる理由（写真つき） ---------- */
+.reason-detail{grid-template-columns:90px 1fr 300px;align-items:start}
+.reason-detail .rd-photo{grid-column:3;grid-row:1;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:var(--radius)}
+.reason-detail > div:last-child{grid-column:2;grid-row:1}
+
+/* ---------- お問合せ帯（クローバー） ---------- */
+.cta{background:linear-gradient(120deg,#2f5b4f,#3f7465)}
+.cta .container{grid-template-columns:400px 1fr;gap:48px}
+.cta-photo{margin:0;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.cta-photo img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.cta-actions{flex-direction:row;flex-wrap:wrap;align-items:center;gap:24px;margin-top:22px}
+
+@media (max-width:960px){
+  .services-photo{grid-template-columns:1fr 1fr}
+  .worries-wrap{grid-template-columns:1fr}
+  .worries-photo{max-height:260px}
+  .cta .container{grid-template-columns:1fr}
+  .cta-photo{max-width:420px}
+  .reason-detail{grid-template-columns:80px 1fr}
+  .reason-detail .rd-photo{grid-column:1/-1;grid-row:auto;max-width:420px}
+  .reason-detail > div:last-child{grid-column:2;grid-row:1}
+}
+@media (max-width:720px){
+  .hero-photo .hero-text{padding-top:40px;text-align:left}
+  .hero-photo .actions{justify-content:flex-start}
+  .hero-img{margin-top:-30px;height:auto;aspect-ratio:3/2}
+  .hero-img img{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 22%);mask-image:linear-gradient(to bottom,transparent 0,#000 22%)}
+  .hero-points{margin-top:-20px;grid-template-columns:1fr}
+  .hero-points li{border-left:0;border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:baseline;text-align:left}
+  .hero-points li:first-child{border-top:0}
+  .hero-points b{display:inline;font-size:16px;min-width:5em}
+  .services-photo{grid-template-columns:1fr}
+  .pt-photo{width:70%}
+  .reason-detail{grid-template-columns:1fr}
+  .reason-detail .num,.reason-detail .rd-photo,.reason-detail > div:last-child{grid-column:1;grid-row:auto}
+}
