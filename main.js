@@ -44,12 +44,12 @@
     return p.length === 3 ? p[0] + "年" + Number(p[1]) + "月" + Number(p[2]) + "日" : esc(d);
   }
 
-  /* ---------- お知らせ・法改正情報（data/*.json を読み込み） ---------- */
+  /* ---------- お知らせ・法改正情報（news.json / law.json を読み込み） ---------- */
   var feeds = document.querySelectorAll("[data-feed]");
   var cache = {};
   function load(name) {
     if (!cache[name]) {
-      cache[name] = fetch("data/" + name + ".json", { cache: "no-cache" }).then(function (r) {
+      cache[name] = fetch(name + ".json", { cache: "no-cache" }).then(function (r) {
         if (!r.ok) throw new Error(r.status);
         return r.json();
       });
@@ -97,7 +97,7 @@
     if (location.hash === "#law") showTab("law");
   }
 
-  /* ---------- Instagram投稿の埋め込み（data/instagram.json に投稿URLを並べる） ---------- */
+  /* ---------- Instagram投稿の埋め込み（instagram.json に投稿URLを並べる） ---------- */
   var insta = document.querySelector("[data-instagram]");
   if (insta) {
     load("instagram").then(function (list) {
@@ -136,7 +136,7 @@
       if (missing.length) { show(false, "次の項目をご確認ください：<br>・" + missing.map(esc).join("<br>・")); return; }
 
       if (!CFG.GAS_URL || CFG.GAS_URL.indexOf("ここに") !== -1) {
-        show(false, "フォームの送信先が未設定です（js/config.js の GAS_URL）。お手数ですがお電話でお問合せください。");
+        show(false, "フォームの送信先が未設定です（config.js の GAS_URL）。お手数ですがお電話でお問合せください。");
         return;
       }
       submit.disabled = true; submit.textContent = "送信しています…";
